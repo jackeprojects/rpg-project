@@ -9,3 +9,9 @@ ENEMY_PRESETS = {
     "goblin": {"strength": 6, "dexterity": 9, "wisdom": 2, "accuracy": 45},
     "skeleton": {"strength": 10, "dexterity": 7, "wisdom": 2, "accuracy": 55}
 }
+
+WOODEN_WEAPON_PRESETS = {
+    "wooden sword": {"name": "Wooden Sword", "archetype": "melee", "base_damage": 2},
+    "wooden bow": {"name": "Wooden Bow", "archetype": "ranged", "base_damage": 2},
+    "wooden staff": {"name": "Wooden Staff", "archetype": "magic", "base_damage": 2}
+}
