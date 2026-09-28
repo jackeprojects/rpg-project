@@ -22,3 +22,6 @@ class Character:
         if amount > self.health:
             amount = self.health
         self.health -= amount
+
+    def is_alive(self):
+        return self.health > 0
