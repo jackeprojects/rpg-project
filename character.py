@@ -1,5 +1,7 @@
 # Template for characters (hero/enemies)
 
+import random
+
 class Character:
     def __init__(self, name: str, role: str, strength: int, dexterity: int, wisdom: int, accuracy: int, level=1):
         self.name = name
@@ -7,6 +9,7 @@ class Character:
         self.strength = strength
         self.dexterity = dexterity
         self.wisdom = wisdom
+        self.accuracy = accuracy
         self.level = level
 
         self.max_health = 100
@@ -25,3 +28,23 @@ class Character:
 
     def is_alive(self):
         return self.health > 0
+
+    def calculate_damage(self, weapon_type):
+        weapon_stat = 0
+        if weapon_type == "melee":
+            # use STR to scale dmg
+            weapon_stat = self.strength
+        elif weapon_type == "ranged":
+            weapon_stat = self.dexterity
+            # use DEX to scale dmg
+        elif weapon_type == "magic":
+            # use WIS to scale dmg
+            weapon_stat = self.wisdom
+        else:
+            raise ValueError("Must be a real weapon_type")
+        is_hit = random.randint(1, 100) <= self.accuracy
+
+        if is_hit:
+            return {"hit": is_hit, "damage": weapon_stat}
+        else:
+            return {"hit": is_hit, "damage": 0}
