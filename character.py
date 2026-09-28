@@ -1,7 +1,7 @@
 # Template for characters (hero/enemies)
 
 class Character:
-    def __init__(self, name: str, role: str, strength: int, dexterity: int, wisdom: int, level=1):
+    def __init__(self, name: str, role: str, strength: int, dexterity: int, wisdom: int, accuracy: int, level=1):
         self.name = name
         self.role = role
         self.strength = strength
