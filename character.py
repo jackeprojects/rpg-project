@@ -48,3 +48,12 @@ class Character:
             return {"hit": is_hit, "damage": damage}
         else:
             return {"hit": is_hit, "damage": 0}
+
+    def heal(self, amount: int):
+        if amount < 0:
+            raise ValueError("Cannot be negative")
+
+        if self.health + amount > self.max_health:
+            self.health = self.max_health
+        else:
+            self.health += amount
