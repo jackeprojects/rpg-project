@@ -47,5 +47,7 @@ while True:
         print("GAME OVER")
         break
 
+    hero.heal(hero.max_health)
+
     if input("Fight again? (y/n): ").lower() != "y":
         break
