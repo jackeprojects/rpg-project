@@ -1,5 +1,6 @@
-from presets import HERO_PRESETS, ENEMY_PRESETS
+from presets import HERO_PRESETS, ENEMY_PRESETS, WOODEN_WEAPON_PRESETS
 from character import Character
+from weapon import Weapon
 import random
 
 # Randomize amount of enemies in a battle
@@ -24,20 +25,29 @@ while True:
         # If choice is Swordsman
         if hero_role == 1:
             # Get name of role
-            key = list(HERO_PRESETS)[hero_role - 1]
-            print(key.title())
+            role_key = list(HERO_PRESETS)[hero_role - 1]
+
+            # Get name of weapon based on hero role choice
+            weap_key = list(WOODEN_WEAPON_PRESETS)[hero_role - 1]
+            print(role_key.title())
             break
         # If choice is Archer
         elif hero_role == 2:
             # Get name of role
-            key = list(HERO_PRESETS)[hero_role - 1]
-            print(key.title())
+            role_key = list(HERO_PRESETS)[hero_role - 1]
+
+            # Get name of weapon based on hero role choice
+            weap_key = list(WOODEN_WEAPON_PRESETS)[hero_role - 1]
+            print(role_key.title())
             break
         # If choice is Mage
         elif hero_role == 3:
             # Get name of role
-            key = list(HERO_PRESETS)[hero_role - 1]
-            print(key.title())
+            role_key = list(HERO_PRESETS)[hero_role - 1]
+
+            # Get name of weapon based on hero role choice
+            weap_key = list(WOODEN_WEAPON_PRESETS)[hero_role - 1]
+            print(role_key.title())
             break
         # If choice doesn't exists
         else:
@@ -47,4 +57,7 @@ while True:
     else:
         print("Illegal input\n")
 
-hero = Character(hero_name, key.title(), **HERO_PRESETS[key])
+# Create hero
+hero = Character(hero_name, role_key.title(), **HERO_PRESETS[role_key])
+# Create weapon
+hero_weap = Weapon(**WOODEN_WEAPON_PRESETS[weap_key])
