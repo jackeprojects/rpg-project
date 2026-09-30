@@ -9,3 +9,42 @@ for _ in range(1, enemy_count + 1):
     enemy_preset = random.choice(list(ENEMY_PRESETS.keys()))
     new_enemy = Character(enemy_preset.title(), enemy_preset, **ENEMY_PRESETS[enemy_preset])
     enemies.append(new_enemy)
+
+hero_name = input("Enter a name: ")
+
+while True:
+    n = 0
+    for n, key in enumerate(HERO_PRESETS, start=1):
+        print(f"[{n}] {key.title()}")
+    hero_role = input("Choose class: ")
+
+    if hero_role.isdigit():
+        hero_role = int(hero_role)
+
+        # If choice is Swordsman
+        if hero_role == 1:
+            # Get name of role
+            key = list(HERO_PRESETS)[hero_role - 1]
+            print(key.title())
+            break
+        # If choice is Archer
+        elif hero_role == 2:
+            # Get name of role
+            key = list(HERO_PRESETS)[hero_role - 1]
+            print(key.title())
+            break
+        # If choice is Mage
+        elif hero_role == 3:
+            # Get name of role
+            key = list(HERO_PRESETS)[hero_role - 1]
+            print(key.title())
+            break
+        # If choice doesn't exists
+        else:
+            print("Illegal choice\n")
+
+    # If choice is not a int
+    else:
+        print("Illegal input\n")
+
+hero = Character(hero_name, key.title(), **HERO_PRESETS[key])
