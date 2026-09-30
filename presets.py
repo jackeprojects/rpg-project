@@ -11,7 +11,7 @@ ENEMY_PRESETS = {
 }
 
 WOODEN_WEAPON_PRESETS = {
-    "wooden sword": {"name": "Wooden Sword", "archetype": "melee", "base_damage": 2},
-    "wooden bow": {"name": "Wooden Bow", "archetype": "ranged", "base_damage": 2},
-    "wooden staff": {"name": "Wooden Staff", "archetype": "magic", "base_damage": 2}
+    "wooden sword": {"name": "Wooden Sword", "archetype": "melee", "base_damage": 20},
+    "wooden bow": {"name": "Wooden Bow", "archetype": "ranged", "base_damage": 20},
+    "wooden staff": {"name": "Wooden Staff", "archetype": "magic", "base_damage": 20}
 }
