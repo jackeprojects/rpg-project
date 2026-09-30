@@ -57,3 +57,17 @@ class Battle:
                 print(target.name, "died!")
         else:
             print(self.hero.name, "missed!")
+
+    def _enemy_turn(self):
+        alive, _ = self._split_enemies()
+        for enemy in alive:
+            if self.hero.is_alive():
+                damage_check = enemy.calculate_damage(self.enemy_weap)
+                if damage_check["hit"]:
+                    damage = round(damage_check["damage"])
+                    self.hero.take_damage(damage)
+                    print(f"{self.hero.name} was hit with {self.enemy_weap.name} by {enemy.name} for {damage}")
+                else:
+                    print(enemy.name, "missed!")
+            else:
+                return
