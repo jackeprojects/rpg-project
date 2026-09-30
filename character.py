@@ -4,21 +4,17 @@ from weapon import Weapon
 import random
 
 class Character:
-    def __init__(self, name: str, role: str, strength: int, dexterity: int, wisdom: int, accuracy: int, level=1):
+    def __init__(self, name: str, role: str, strength: int, dexterity: int, wisdom: int, accuracy: int, max_health=100, level=1):
         self.name = name
         self.role = role
         self.strength = strength
         self.dexterity = dexterity
         self.wisdom = wisdom
         self.accuracy = accuracy
+        self.max_health = max_health
         self.level = level
-
-        self.max_health = 100
-        self.max_stamina = 100
-        self.max_mana = 100
+        
         self.health = self.max_health
-        self.stamina = self.max_stamina
-        self.mana = self.max_mana
 
     def take_damage(self, amount):
         if amount < 0:
