@@ -5,9 +5,9 @@ HERO_PRESETS = {
 }
 
 ENEMY_PRESETS = {
-    "rat": {"strength": 3, "dexterity": 6, "wisdom": 1, "accuracy": 35},
-    "goblin": {"strength": 6, "dexterity": 9, "wisdom": 2, "accuracy": 45},
-    "skeleton": {"strength": 10, "dexterity": 7, "wisdom": 2, "accuracy": 55}
+    "rat": {"strength": 3, "dexterity": 6, "wisdom": 1, "accuracy": 35, "max_health": 40},
+    "goblin": {"strength": 6, "dexterity": 9, "wisdom": 2, "accuracy": 45, "max_health": 60},
+    "skeleton": {"strength": 10, "dexterity": 7, "wisdom": 2, "accuracy": 55, "max_health": 80}
 }
 
 WOODEN_WEAPON_PRESETS = {
