@@ -45,3 +45,15 @@ class Battle:
 
             else:
                 print("Not a valid choice")
+
+    def _hero_turn(self):
+        target = self._choose_target()
+        damage_check = self.hero.calculate_damage(self.hero_weap)
+        if damage_check["hit"]:
+            damage = round(damage_check["damage"])
+            target.take_damage(damage)
+            print(f"{target.name} was hit with {self.hero_weap.name} for {damage}")
+            if not target.is_alive():
+                print(target.name, "died!")
+        else:
+            print(self.hero.name, "missed!")
