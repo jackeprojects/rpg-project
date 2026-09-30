@@ -4,14 +4,6 @@ from weapon import Weapon
 from battle import Battle
 import random
 
-# Randomize amount of enemies in a battle
-enemy_count = random.randint(1, 5)
-enemies = []
-for _ in range(1, enemy_count + 1):
-    enemy_preset = random.choice(list(ENEMY_PRESETS.keys()))
-    new_enemy = Character(enemy_preset.title(), enemy_preset, **ENEMY_PRESETS[enemy_preset])
-    enemies.append(new_enemy)
-
 hero_name = input("Enter a name: ")
 
 while True:
@@ -31,12 +23,29 @@ while True:
 
     print("Must choose a valid role.\n")
 
-# Create hero
+# Create hero and their weapon
 hero = Character(hero_name, role_key.title(), **HERO_PRESETS[role_key])
-# Create weapon
 hero_weap = Weapon(**WOODEN_WEAPON_PRESETS[weap_key])
 
+# Create enemy weapon
 enemy_weap = Weapon("Scratch", "melee", 6)
 
-battle_1 = Battle(hero, hero_weap, enemies, enemy_weap)
-won = battle_1.start()
+while True:
+    # Randomize amount of enemies in a battle
+    enemy_count = random.randint(1, 5)
+    enemies = []
+    for _ in range(1, enemy_count + 1):
+        enemy_preset = random.choice(list(ENEMY_PRESETS.keys()))
+        new_enemy = Character(enemy_preset.title(), enemy_preset, **ENEMY_PRESETS[enemy_preset])
+        enemies.append(new_enemy)
+
+    # Create battle and start it
+    battle = Battle(hero, hero_weap, enemies, enemy_weap)
+    won = battle.start()
+
+    if not won:
+        print("GAME OVER")
+        break
+
+    if input("Fight again? (y/n): ").lower() != "y":
+        break
