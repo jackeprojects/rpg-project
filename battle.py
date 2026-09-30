@@ -9,7 +9,19 @@ class Battle:
         self.enemy_weap = enemy_weap
 
     def start(self):
-        pass
+        while True:
+            alive, _ = self._split_enemies()
+            if not self.hero.is_alive() or not alive:
+                break
+            self._hero_turn()
+            self._enemy_turn()
+
+        if self.hero.is_alive():
+            print("Success! All enemies have been defeated")
+            return True
+        else:
+            print("Defeat!", self.hero.name, "has died!")
+            return False
 
     def _split_enemies(self):
         alive = []
