@@ -17,7 +17,7 @@ class Battle:
 
             print(f"\n========== Round {round_number} ==========")
             print(f"{self.hero.name} - {self.hero.health}/{self.hero.max_health} HP")
-            print("\n-- Your turn --")
+            print("\n-- Choose a target --")
 
             self._hero_turn()
 
@@ -25,17 +25,17 @@ class Battle:
             if not alive:
                 break
 
-            print("\n-- Enemy turn --")
+            print("\n-- Enemies --")
             self._enemy_turn()
 
-            input("Press Enter to continue...")
+            if self.hero.is_alive():
+                input("\nPress Enter to continue...")
             round_number += 1
 
         if self.hero.is_alive():
             print("Success! All enemies have been defeated.")
             return True
         else:
-            print(f"Defeat! {self.hero.name} has died!")
             return False
 
     def _split_enemies(self):
@@ -75,6 +75,7 @@ class Battle:
 
     def _hero_turn(self):
         target = self._choose_target()
+        print("\n-- You --")
         self._attack(self.hero, target, self.hero_weap)
 
     def _enemy_turn(self):
