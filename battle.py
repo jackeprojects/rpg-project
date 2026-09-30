@@ -21,3 +21,10 @@ class Battle:
                 dead.append(enemy)
 
         return alive, dead
+
+    def _show_enemies(self):
+        alive, dead = self._split_enemies()
+        for index, enemy in enumerate(alive, start=1):
+            print(f"[{index}] {enemy.name} - {enemy.health}/{enemy.max_health} HP")
+        for enemy in dead:
+            print(f"[x] {enemy.name} - Dead")
