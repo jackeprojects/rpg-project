@@ -10,3 +10,14 @@ class Battle:
 
     def start(self):
         pass
+
+    def _split_enemies(self):
+        alive = []
+        dead = []
+        for enemy in self.enemies:
+            if enemy.is_alive():
+                alive.append(enemy)
+            else:
+                dead.append(enemy)
+
+        return alive, dead
