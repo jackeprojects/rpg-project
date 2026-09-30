@@ -75,26 +75,24 @@ class Battle:
 
     def _hero_turn(self):
         target = self._choose_target()
-        damage_check = self.hero.calculate_damage(self.hero_weap)
-        if damage_check["hit"]:
-            damage = round(damage_check["damage"])
-            target.take_damage(damage)
-            print(f"{target.name} was hit with {self.hero_weap.name} for {damage}")
-            if not target.is_alive():
-                print(target.name, "died!")
-        else:
-            print(self.hero.name, "missed!")
+        self._attack(self.hero, target, self.hero_weap)
 
     def _enemy_turn(self):
         alive, _ = self._split_enemies()
         for enemy in alive:
             if self.hero.is_alive():
-                damage_check = enemy.calculate_damage(self.enemy_weap)
-                if damage_check["hit"]:
-                    damage = round(damage_check["damage"])
-                    self.hero.take_damage(damage)
-                    print(f"{self.hero.name} was hit with {self.enemy_weap.name} by {enemy.name} for {damage}")
-                else:
-                    print(enemy.name, "missed!")
+                self._attack(enemy, self.hero, self.enemy_weap)
             else:
                 return
+
+    def _attack(self, attacker: Character, defender: Character, weapon: Weapon):
+        damage_check = attacker.calculate_damage(weapon)
+        if damage_check["hit"]:
+            damage = round(damage_check["damage"])
+            defender.take_damage(damage)
+            print(f"{attacker.name} hits {defender.name} with {weapon.name} for {damage} damage.")
+        else:
+            print(f"{attacker.name} misses!")
+
+        if not defender.is_alive():
+            print(f"{defender.name} died!")
