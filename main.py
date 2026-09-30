@@ -15,48 +15,21 @@ for _ in range(1, enemy_count + 1):
 hero_name = input("Enter a name: ")
 
 while True:
-    n = 0
     for n, key in enumerate(HERO_PRESETS, start=1):
         print(f"[{n}] {key.title()}")
     hero_role = input("Choose class: ")
 
     if hero_role.isdigit():
         hero_role = int(hero_role)
+        if 1 <= hero_role <= len(HERO_PRESETS):
+            role_index = hero_role - 1
 
-        # If choice is Swordsman
-        if hero_role == 1:
-            # Get name of role
-            role_key = list(HERO_PRESETS)[hero_role - 1]
-
-            # Get name of weapon based on hero role choice
-            weap_key = list(WOODEN_WEAPON_PRESETS)[hero_role - 1]
-            print(role_key.title())
+            # Get role and weapon
+            role_key = list(HERO_PRESETS)[role_index]
+            weap_key = list(WOODEN_WEAPON_PRESETS)[role_index]
             break
-        # If choice is Archer
-        elif hero_role == 2:
-            # Get name of role
-            role_key = list(HERO_PRESETS)[hero_role - 1]
 
-            # Get name of weapon based on hero role choice
-            weap_key = list(WOODEN_WEAPON_PRESETS)[hero_role - 1]
-            print(role_key.title())
-            break
-        # If choice is Mage
-        elif hero_role == 3:
-            # Get name of role
-            role_key = list(HERO_PRESETS)[hero_role - 1]
-
-            # Get name of weapon based on hero role choice
-            weap_key = list(WOODEN_WEAPON_PRESETS)[hero_role - 1]
-            print(role_key.title())
-            break
-        # If choice doesn't exists
-        else:
-            print("Illegal choice\n")
-
-    # If choice is not a int
-    else:
-        print("Illegal input\n")
+    print("Must choose a valid role.\n")
 
 # Create hero
 hero = Character(hero_name, role_key.title(), **HERO_PRESETS[role_key])
