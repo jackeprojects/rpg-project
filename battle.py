@@ -9,18 +9,33 @@ class Battle:
         self.enemy_weap = enemy_weap
 
     def start(self):
+        round_number = 1
         while True:
             alive, _ = self._split_enemies()
             if not self.hero.is_alive() or not alive:
                 break
+
+            print(f"\n========== Round {round_number} ==========")
+            print(f"{self.hero.name} - {self.hero.health}/{self.hero.max_health} HP")
+            print("\n-- Your turn --")
+
             self._hero_turn()
+
+            alive, _ = self._split_enemies()
+            if not alive:
+                break
+
+            print("\n-- Enemy turn --")
             self._enemy_turn()
 
+            input("Press Enter to continue...")
+            round_number += 1
+
         if self.hero.is_alive():
-            print("Success! All enemies have been defeated")
+            print("Success! All enemies have been defeated.")
             return True
         else:
-            print("Defeat!", self.hero.name, "has died!")
+            print(f"Defeat! {self.hero.name} has died!")
             return False
 
     def _split_enemies(self):
