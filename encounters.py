@@ -29,9 +29,6 @@ def build_enemies(chosen_encounter):
 def rest(hero: Character, encounter):
     if encounter["heal_percent"] <= 0:
         raise ValueError("Must be positive")
-    if hero.health == hero.max_health:
-        print("You rest, but you're already at full health.")
-        return
     old_health = hero.health
     amount = hero.max_health * encounter["heal_percent"] // 100
     hero.heal(amount)
