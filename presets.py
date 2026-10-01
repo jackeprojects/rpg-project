@@ -20,6 +20,12 @@ ENCOUNTER_PRESETS = [
     {"name": "Skeleton and goblin ambush", "type": "battle", "min_level": 3, "enemies": ["skeleton", "goblin"]},
     {"name": "The crypt guards", "type": "battle", "min_level": 4, "enemies": ["skeleton", "skeleton", "goblin"]},
     {"name": "A horde", "type": "battle", "min_level": 5, "enemies": ["skeleton", "goblin", "goblin", "rat", "rat"]},
+    
+    {"name": "A quiet campfire", "type": "rest", "min_level": 1, "heal_percent": 50},
+    {"name": "A mossy spring", "type": "rest", "min_level": 1, "heal_percent": 35},
+    {"name": "An abandoned hunter's cabin", "type": "rest", "min_level": 2, "heal_percent": 60},
+    {"name": "A friendly healer's wagon", "type": "rest", "min_level": 3, "heal_percent": 80},
+    {"name": "A moonlit shrine", "type": "rest", "min_level": 4, "heal_percent": 100},
 ]
 
 WOODEN_WEAPON_PRESETS = {

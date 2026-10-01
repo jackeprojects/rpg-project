@@ -21,3 +21,12 @@ def build_enemies(chosen_encounter):
         enemies.append(new_enemy)
 
     return enemies
+
+
+def rest(hero: Character, encounter):
+    if encounter["heal_percent"] <= 0:
+        raise ValueError("Must be positive")
+    old_health = hero.health
+    amount = hero.max_health * encounter["heal_percent"] // 100
+    hero.heal(amount)
+    print(f"You rest and recover {hero.health - old_health} HP.")
