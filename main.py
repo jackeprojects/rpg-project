@@ -4,28 +4,32 @@ from weapon import Weapon
 from battle import Battle
 from encounters import create_encounter
 
-hero_name = input("Enter a name: ")
+def create_hero():
+    hero_name = input("Enter a name: ")
 
-while True:
-    for n, key in enumerate(HERO_PRESETS, start=1):
-        print(f"[{n}] {key.title()}")
-    hero_role = input("Choose class: ")
+    while True:
+        for n, key in enumerate(HERO_PRESETS, start=1):
+            print(f"[{n}] {key.title()}")
+        hero_role = input("Choose class: ")
 
-    if hero_role.isdigit():
-        hero_role = int(hero_role)
-        if 1 <= hero_role <= len(HERO_PRESETS):
-            role_index = hero_role - 1
+        if hero_role.isdigit():
+            hero_role = int(hero_role)
+            if 1 <= hero_role <= len(HERO_PRESETS):
+                role_index = hero_role - 1
 
-            # Get role and weapon
-            role_key = list(HERO_PRESETS)[role_index]
-            weap_key = list(WOODEN_WEAPON_PRESETS)[role_index]
-            break
+                # Get role and weapon
+                role_key = list(HERO_PRESETS)[role_index]
+                weap_key = list(WOODEN_WEAPON_PRESETS)[role_index]
+                break
 
-    print("Must choose a valid role.\n")
+        print("Must choose a valid role.\n")
 
-# Create hero and their weapon
-hero = Character(hero_name, role_key.title(), **HERO_PRESETS[role_key])
-hero_weap = Weapon(**WOODEN_WEAPON_PRESETS[weap_key])
+    # Create hero and their weapon
+    hero = Character(hero_name, role_key.title(), **HERO_PRESETS[role_key])
+    hero_weap = Weapon(**WOODEN_WEAPON_PRESETS[weap_key])
+    return hero, hero_weap
+
+hero, hero_weap = create_hero()
 
 # Create enemy weapon
 enemy_weap = Weapon("Scratch", "melee", 6)
