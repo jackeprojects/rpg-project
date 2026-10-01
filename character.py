@@ -72,3 +72,8 @@ class Character:
 
     def _level_up(self):
         self.level += 1
+        self.strength += 1
+        self.dexterity += 1
+        self.wisdom += 1
+        self.max_health += 10
+        self.heal(self.max_health)
