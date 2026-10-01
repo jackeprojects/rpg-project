@@ -10,6 +10,18 @@ ENEMY_PRESETS = {
     "skeleton": {"strength": 10, "dexterity": 7, "wisdom": 2, "accuracy": 55, "max_health": 80, "xp_reward": 35}
 }
 
+ENCOUNTER_PRESETS = [
+    {"name": "A lone rat", "min_level": 1, "enemies": ["rat"]},
+    {"name": "A pair of rats", "min_level": 1, "enemies": ["rat", "rat"]},
+    {"name": "A wandering goblin", "min_level": 1, "enemies": ["goblin"]},
+    {"name": "A goblin and its pet", "min_level": 2, "enemies": ["goblin", "rat"]},
+    {"name": "A goblin raiding party", "min_level": 2, "enemies": ["goblin", "goblin", "rat"]},
+    {"name": "A restless skeleton", "min_level": 3, "enemies": ["skeleton"]},
+    {"name": "Skeleton and goblin ambush", "min_level": 3, "enemies": ["skeleton", "goblin"]},
+    {"name": "The crypt guards", "min_level": 4, "enemies": ["skeleton", "skeleton", "goblin"]},
+    {"name": "A horde", "min_level": 5, "enemies": ["skeleton", "goblin", "goblin", "rat", "rat"]},
+]
+
 WOODEN_WEAPON_PRESETS = {
     "wooden sword": {"name": "Wooden Sword", "archetype": "melee", "base_damage": 20},
     "wooden bow": {"name": "Wooden Bow", "archetype": "ranged", "base_damage": 20},
