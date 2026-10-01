@@ -29,6 +29,18 @@ def create_hero():
     hero_weap = Weapon(**WOODEN_WEAPON_PRESETS[weap_key])
     return hero, hero_weap
 
+
+def award_xp(hero: Character, enemies: list):
+    xp_gained = 0
+    for enemy in enemies:
+        xp_gained += enemy.xp_reward
+
+    old_level = hero.level
+    hero.gain_xp(xp_gained)
+    print(f"You gained {xp_gained} XP")
+    if hero.level > old_level:
+        print(f"Level up! You are now level {hero.level}.")
+
 hero, hero_weap = create_hero()
 
 # Create enemy weapon
@@ -48,16 +60,7 @@ while True:
 
     print("Success! All enemies have been defeated.")
 
-    xp_gained = 0
-    for enemy in enemies:
-        xp_gained += enemy.xp_reward
-
-    old_level = hero.level
-    hero.gain_xp(xp_gained)
-    print(f"You gained {xp_gained} XP")
-    if hero.level > old_level:
-        print(f"Level up! You are now level {hero.level}.")
-
+    award_xp(hero, enemies)
     hero.heal(hero.max_health)
 
     if input("Fight again? (y/n): ").lower() != "y":
