@@ -2,7 +2,7 @@ from presets import HERO_PRESETS, WOODEN_WEAPON_PRESETS
 from character import Character
 from weapon import Weapon
 from battle import Battle
-from encounters import create_encounter
+from encounters import create_encounter, build_enemies
 
 def create_hero():
     hero_name = input("Enter a name: ")
@@ -49,23 +49,26 @@ def main():
     enemy_weap = Weapon("Scratch", "melee", 6)
 
     while True:
-        encounter_name, enemies = create_encounter(hero.level)
-        print(f"\n{encounter_name} appears!")
+        encounter = create_encounter(hero.level)
+        print(f"\n{encounter['name']} appears!")
 
-        # Create battle and start it
-        battle = Battle(hero, hero_weap, enemies, enemy_weap)
-        won = battle.start()
+        if encounter["type"] == "battle":
+            enemies = build_enemies(encounter)
 
-        if not won:
-            print(f"{hero.name} has fallen... GAME OVER")
-            break
+            # Create battle and start it
+            battle = Battle(hero, hero_weap, enemies, enemy_weap)
+            won = battle.start()
 
-        print("Success! All enemies have been defeated.")
+            if not won:
+                print(f"{hero.name} has fallen... GAME OVER")
+                break
 
-        award_xp(hero, enemies)
-        hero.heal(hero.max_health)
+            print("Success! All enemies have been defeated.")
 
-        if input("Fight again? (y/n): ").lower() != "y":
+            award_xp(hero, enemies)
+            hero.heal(hero.max_health)
+
+        if input("Continue or quit? (Enter/q): ").lower() == "q":
             break
 
 

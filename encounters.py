@@ -11,9 +11,13 @@ def create_encounter(hero_level: int):
 
     chosen_encounter = random.choice(allowed_encounters)
 
+    return chosen_encounter
+
+
+def build_enemies(chosen_encounter):
     enemies = []
     for enemy_name in chosen_encounter["enemies"]:
         new_enemy = Character(enemy_name.title(), enemy_name, **ENEMY_PRESETS[enemy_name])
         enemies.append(new_enemy)
 
-    return chosen_encounter["name"], enemies
+    return enemies
