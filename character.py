@@ -1,9 +1,9 @@
-# Template for characters (hero/enemies)
-
 from weapon import Weapon
 import random
 
 class Character:
+    """A hero or enemy with stats, health and ability to fight and level"""
+
     def __init__(self, name: str, role: str, strength: int, dexterity: int, wisdom: int, accuracy: int, max_health=100, xp_reward=0, level=1):
         self.name = name
         self.role = role
@@ -19,48 +19,60 @@ class Character:
         self.xp = 0
 
     def take_damage(self, amount):
+        """Reduces health by the amount without going below zero"""
+
         if amount < 0:
             raise ValueError("Cannot be negative")
+
         if amount > self.health:
             amount = self.health
+
         self.health -= amount
 
     def is_alive(self):
+        """Checks if character is alive and returns result"""
         return self.health > 0
 
     def calculate_damage(self, weapon: Weapon):
-        weapon_stat = 0
-        if weapon.archetype == "melee":
-            # use STR to scale dmg
+        """Rolls to hit and returns dict with result and how much damage"""
+
+        if weapon.archetype == "melee":  # use Strength to scale damage
             weapon_stat = self.strength
-        elif weapon.archetype == "ranged":
+
+        elif weapon.archetype == "ranged":  # use Dexterity to scale damage
             weapon_stat = self.dexterity
-            # use DEX to scale dmg
-        elif weapon.archetype == "magic":
-            # use WIS to scale dmg
+
+        elif weapon.archetype == "magic":  # use Wisdom to scale damage
             weapon_stat = self.wisdom
+
         else:
             raise ValueError("Must have a valid archetype")
-        
+
         is_hit = random.randint(1, 100) <= self.accuracy
 
         damage = weapon.base_damage * (1 + weapon_stat / 100)
 
         if is_hit:
             return {"hit": is_hit, "damage": damage}
+
         else:
             return {"hit": is_hit, "damage": 0}
 
     def heal(self, amount: int):
+        """Heals the character up to max health"""
+
         if amount < 0:
             raise ValueError("Cannot be negative")
 
         if self.health + amount > self.max_health:
             self.health = self.max_health
+
         else:
             self.health += amount
 
     def gain_xp(self, amount: int):
+        """Applies xp to character and levels up if it can"""
+
         if amount < 0:
             raise ValueError("Cannot be negative")
 
@@ -71,6 +83,8 @@ class Character:
             self._level_up()
 
     def _level_up(self):
+        """Raises the level and stats, max health and fully heals character"""
+
         self.level += 1
         self.strength += 1
         self.dexterity += 1

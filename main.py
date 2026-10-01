@@ -5,6 +5,8 @@ from battle import Battle
 from encounters import create_encounter, build_enemies, rest, train
 
 def create_hero():
+    """Asks for name and class, then returns their new hero and starter weapon"""
+
     hero_name = ""
     while not hero_name:
         hero_name = input("Enter a name: ").strip()
@@ -12,10 +14,12 @@ def create_hero():
     while True:
         for n, key in enumerate(HERO_PRESETS, start=1):
             print(f"[{n}] {key.title()}")
+
         hero_role = input("Choose class: ")
 
         if hero_role.isdigit():
             hero_role = int(hero_role)
+
             if 1 <= hero_role <= len(HERO_PRESETS):
                 role_index = hero_role - 1
 
@@ -33,6 +37,8 @@ def create_hero():
 
 
 def award_xp(hero: Character, enemies: list):
+    """Gives the hero the combined xp of the defeated enemies and reports any level up"""
+
     xp_gained = 0
     for enemy in enemies:
         xp_gained += enemy.xp_reward
@@ -40,11 +46,14 @@ def award_xp(hero: Character, enemies: list):
     old_level = hero.level
     hero.gain_xp(xp_gained)
     print(f"You gained {xp_gained} XP")
+
     if hero.level > old_level:
         print(f"Level up! You are now level {hero.level}.")
 
 
 def main():
+    """Runs encounters one after another until the hero dies or the player quits"""
+
     hero, hero_weap = create_hero()
 
     # Create enemy weapon
@@ -68,8 +77,10 @@ def main():
             print("Success! All enemies have been defeated.")
 
             award_xp(hero, enemies)
+
         elif encounter["type"] == "rest":
             rest(hero, encounter)
+
         elif encounter["type"] == "train":
             train(hero)
 

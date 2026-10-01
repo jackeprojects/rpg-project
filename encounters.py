@@ -3,13 +3,17 @@ from character import Character
 import random
 
 def create_encounter(hero: Character):
+    """Chooses and returns a random encounter that the hero's level allows"""
+
     allowed_encounters = []
 
     for encounter in ENCOUNTER_PRESETS:
         if hero.level < encounter["min_level"]:
             continue
+
         if encounter["type"] == "rest" and hero.health == hero.max_health:
             continue
+
         allowed_encounters.append(encounter)
 
     chosen_encounter = random.choice(allowed_encounters)
@@ -18,7 +22,10 @@ def create_encounter(hero: Character):
 
 
 def build_enemies(chosen_encounter):
+    """Creates enemies from the given encounter"""
+
     enemies = []
+
     for enemy_name in chosen_encounter["enemies"]:
         new_enemy = Character(enemy_name.title(), enemy_name, **ENEMY_PRESETS[enemy_name])
         enemies.append(new_enemy)
@@ -27,8 +34,11 @@ def build_enemies(chosen_encounter):
 
 
 def rest(hero: Character, encounter):
+    """Heals the hero by the encounter's percentage of max health and reports the amount healed"""
+
     if encounter["heal_percent"] <= 0:
         raise ValueError("Must be positive")
+
     old_health = hero.health
     amount = hero.max_health * encounter["heal_percent"] // 100
     hero.heal(amount)
@@ -36,15 +46,20 @@ def rest(hero: Character, encounter):
 
 
 def train(hero: Character):
+    """Asks which stat to raise and increases it by 1"""
+
     stats = ["strength", "dexterity", "wisdom"]
     while True:
         print()
+
         for index, stat in enumerate(stats, start=1):
             print(f"[{index}] {stat.title()} ({getattr(hero, stat)})")
+
         choice = input("Choose stat: ")
 
         if choice.isdigit():
             choice = int(choice)
+
             if 1 <= choice <= len(stats):
                 stat = stats[choice - 1]
                 setattr(hero, stat, getattr(hero, stat) + 1)
