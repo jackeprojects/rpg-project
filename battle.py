@@ -22,7 +22,6 @@ class Battle:
 
             print(f"\n========== Round {round_number} ==========")
             print(f"{self.hero.name} - {self.hero.health}/{self.hero.max_health} HP | {self.hero.gold} Gold")
-            print("\n-- Choose a target --")
 
             self._hero_turn()
 
@@ -87,11 +86,36 @@ class Battle:
                 print("Not a valid choice")
 
     def _hero_turn(self):
-        """Has the player choose a target and attack it"""
+        """Asks the player whether to attack or use a potion"""
 
-        target = self._choose_target()
-        print("\n-- You --")
-        self._attack(self.hero, target, self.hero_weap)
+        while True:
+            self._show_enemies()
+
+            print(f"\n[1] Attack\n[2] Use potion ({self.hero.potions} left)")
+            choice = input("Choose option: ")
+
+            if choice.isdigit():
+                choice = int(choice)
+
+                if choice == 1:
+                    print("\n-- Choose a target --")
+                    target = self._choose_target()
+                    print("\n-- You --")
+                    self._attack(self.hero, target, self.hero_weap)
+                    return
+
+                elif choice == 2:
+                    if self.hero.potions > 0:
+                        print("\n-- You --")
+                        hp_recovered = self.hero.use_potion()
+                        print(f"You drink potion and recover {hp_recovered} HP")
+                        return
+
+                    else:
+                        print("You have no potions left!")
+                        continue
+
+            print("Not a valid choice")
 
     def _enemy_turn(self):
         """Has each living enemy attack the hero"""
