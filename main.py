@@ -5,7 +5,9 @@ from battle import Battle
 from encounters import create_encounter, build_enemies, rest
 
 def create_hero():
-    hero_name = input("Enter a name: ")
+    hero_name = ""
+    while not hero_name:
+        hero_name = input("Enter a name: ").strip()
 
     while True:
         for n, key in enumerate(HERO_PRESETS, start=1):
