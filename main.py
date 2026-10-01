@@ -2,7 +2,7 @@ from presets import HERO_PRESETS, WOODEN_WEAPON_PRESETS
 from character import Character
 from weapon import Weapon
 from battle import Battle
-from encounters import create_encounter, build_enemies, rest
+from encounters import create_encounter, build_enemies, rest, train
 
 def create_hero():
     hero_name = ""
@@ -70,6 +70,8 @@ def main():
             award_xp(hero, enemies)
         elif encounter["type"] == "rest":
             rest(hero, encounter)
+        elif encounter["type"] == "train":
+            train(hero, encounter)
 
         if input("Continue or quit? (Enter/q): ").lower() == "q":
             break

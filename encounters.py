@@ -33,3 +33,22 @@ def rest(hero: Character, encounter):
     amount = hero.max_health * encounter["heal_percent"] // 100
     hero.heal(amount)
     print(f"You rest and recover {hero.health - old_health} HP.")
+
+
+def train(hero: Character):
+    stats = ["strength", "dexterity", "wisdom"]
+    while True:
+        print()
+        for index, stat in enumerate(stats, start=1):
+            print(f"[{index}] {stat.title()} ({getattr(hero, stat)})")
+        choice = input("Choose stat: ")
+
+        if choice.isdigit():
+            choice = int(choice)
+            if 1 <= choice <= len(stats):
+                stat = stats[choice - 1]
+                setattr(hero, stat, getattr(hero, stat) + 1)
+                print(f"Your {stat.title()} is now {getattr(hero, stat)}")
+                return
+
+        print("Not a valid choice")
