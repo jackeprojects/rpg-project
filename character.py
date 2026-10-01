@@ -17,6 +17,7 @@ class Character:
         self.level = level
 
         self.health = self.max_health
+        self.potions = 0
         self.gold = 0
         self.xp = 0
 
@@ -91,6 +92,18 @@ class Character:
             raise ValueError("Cannot be negative")
 
         self.gold += amount
+
+    def use_potion(self):
+        """Uses a potion to heal and returns the amount healed"""
+
+        if self.potions <= 0:
+            raise ValueError("No potions left")
+
+        old_health = self.health
+        self.potions -= 1
+        self.heal(self.max_health // 2)
+
+        return self.health - old_health
 
     def _level_up(self):
         """Raises the level and stats, max health and fully heals character"""

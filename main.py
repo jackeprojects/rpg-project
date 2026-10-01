@@ -33,6 +33,10 @@ def create_hero():
     # Create hero and their weapon
     hero = Character(hero_name, role_key.title(), **HERO_PRESETS[role_key])
     hero_weap = Weapon(**WOODEN_WEAPON_PRESETS[weap_key])
+
+    # Give hero 2 starting potions
+    hero.potions = 2
+
     return hero, hero_weap
 
 
