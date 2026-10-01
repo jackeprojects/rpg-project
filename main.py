@@ -39,8 +39,10 @@ while True:
     won = battle.start()
 
     if not won:
-        print("GAME OVER")
+        print(f"{hero.name} has fallen... GAME OVER")
         break
+
+    print("Success! All enemies have been defeated.")
 
     xp_gained = 0
     for enemy in enemies:

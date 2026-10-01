@@ -31,12 +31,7 @@ class Battle:
             if self.hero.is_alive():
                 input("\nPress Enter to continue...")
             round_number += 1
-
-        if self.hero.is_alive():
-            print("Success! All enemies have been defeated.")
-            return True
-        else:
-            return False
+        return self.hero.is_alive()
 
     def _split_enemies(self):
         alive = []
