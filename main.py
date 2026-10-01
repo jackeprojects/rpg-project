@@ -71,7 +71,7 @@ def main():
         elif encounter["type"] == "rest":
             rest(hero, encounter)
         elif encounter["type"] == "train":
-            train(hero, encounter)
+            train(hero)
 
         if input("Continue or quit? (Enter/q): ").lower() == "q":
             break
