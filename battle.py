@@ -29,7 +29,7 @@ class Battle:
             if not alive:
                 break
 
-            print("\n-- Enemies --")
+            print("\n-- Enemy turn --")
             self._enemy_turn()
 
             if self.hero.is_alive():
@@ -54,22 +54,32 @@ class Battle:
 
         return alive, dead
 
-    def _show_enemies(self):
-        """Prints the enemies, numbering the alive and marking the dead"""
+    def _show_enemies(self, numbered=False):
+        """Prints the enemies, also numbers the living and marks the dead if numbered is True"""
 
         alive, dead = self._split_enemies()
-        for index, enemy in enumerate(alive, start=1):
-            print(f"[{index}] {enemy.name} - {enemy.health}/{enemy.max_health} HP")
+        if numbered:
+            for index, enemy in enumerate(alive, start=1):
+                print(f"[{index}] {enemy.name} - {enemy.health}/{enemy.max_health} HP")
+
+            for enemy in dead:
+                print(f"[x] {enemy.name} - Dead")
+            return
+
+        for enemy in alive:
+            print(f"{enemy.name} - {enemy.health}/{enemy.max_health} HP")
 
         for enemy in dead:
-            print(f"[x] {enemy.name} - Dead")
+            print(f"{enemy.name} - Dead")
 
     def _choose_target(self):
         """Asks the player to choose a living enemy and returns it"""
 
         alive, _ = self._split_enemies()
         while True:
-            self._show_enemies()
+            print("\n-- Enemies --")
+            self._show_enemies(numbered=True)
+            print("\n-- Choose a target --")
             choice = input("Choose enemy: ")
 
             if choice.isdigit():
@@ -89,6 +99,7 @@ class Battle:
         """Asks the player whether to attack or use a potion"""
 
         while True:
+            print("\n-- Enemies --")
             self._show_enemies()
 
             print(f"\n[1] Attack\n[2] Use potion ({self.hero.potions} left)")
@@ -98,22 +109,27 @@ class Battle:
                 choice = int(choice)
 
                 if choice == 1:
-                    print("\n-- Choose a target --")
                     target = self._choose_target()
-                    print("\n-- You --")
+                    print("\n-- Your turn --")
                     self._attack(self.hero, target, self.hero_weap)
                     return
 
                 elif choice == 2:
-                    if self.hero.potions > 0:
-                        print("\n-- You --")
-                        hp_recovered = self.hero.use_potion()
-                        print(f"You drink potion and recover {hp_recovered} HP")
-                        return
-
-                    else:
+                    if self.hero.potions <= 0:
                         print("You have no potions left!")
+                        input("\nPress Enter to continue...")
                         continue
+                    if self.hero.health == self.hero.max_health:
+                        print("You are already at full health!")
+                        input("\nPress Enter to continue...")
+                        continue
+                    print("\n-- Your turn --")
+                    hp_recovered = self.hero.use_potion()
+                    if self.hero.health == self.hero.max_health:
+                        print("You drink a potion and are now back at full health!")
+                    else:
+                        print(f"You drink a potion and recover {hp_recovered} HP.")
+                    return
 
             print("Not a valid choice")
 
