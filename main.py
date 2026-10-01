@@ -41,27 +41,33 @@ def award_xp(hero: Character, enemies: list):
     if hero.level > old_level:
         print(f"Level up! You are now level {hero.level}.")
 
-hero, hero_weap = create_hero()
 
-# Create enemy weapon
-enemy_weap = Weapon("Scratch", "melee", 6)
+def main():
+    hero, hero_weap = create_hero()
 
-while True:
-    encounter_name, enemies = create_encounter(hero.level)
-    print(f"\n{encounter_name} appears!")
+    # Create enemy weapon
+    enemy_weap = Weapon("Scratch", "melee", 6)
 
-    # Create battle and start it
-    battle = Battle(hero, hero_weap, enemies, enemy_weap)
-    won = battle.start()
+    while True:
+        encounter_name, enemies = create_encounter(hero.level)
+        print(f"\n{encounter_name} appears!")
 
-    if not won:
-        print(f"{hero.name} has fallen... GAME OVER")
-        break
+        # Create battle and start it
+        battle = Battle(hero, hero_weap, enemies, enemy_weap)
+        won = battle.start()
 
-    print("Success! All enemies have been defeated.")
+        if not won:
+            print(f"{hero.name} has fallen... GAME OVER")
+            break
 
-    award_xp(hero, enemies)
-    hero.heal(hero.max_health)
+        print("Success! All enemies have been defeated.")
 
-    if input("Fight again? (y/n): ").lower() != "y":
-        break
+        award_xp(hero, enemies)
+        hero.heal(hero.max_health)
+
+        if input("Fight again? (y/n): ").lower() != "y":
+            break
+
+
+if __name__ == "__main__":
+    main()
