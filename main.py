@@ -47,6 +47,16 @@ while True:
         print("GAME OVER")
         break
 
+    xp_gained = 0
+    for enemy in enemies:
+        xp_gained += enemy.xp_reward
+
+    old_level = hero.level
+    hero.gain_xp(xp_gained)
+    print(f"You gained {xp_gained} XP")
+    if hero.level > old_level:
+        print(f"Level up! You are now level {hero.level}.")
+
     hero.heal(hero.max_health)
 
     if input("Fight again? (y/n): ").lower() != "y":
