@@ -85,7 +85,7 @@ class Character:
             self._level_up()
 
     def gain_gold(self, amount: int):
-        """Gives gold to player"""
+        """Adds gold to the character"""
 
         if amount < 0:
             raise ValueError("Cannot be negative")
