@@ -1,10 +1,10 @@
 # rpg-project
-
 Simple turn-based rpg game that is played through the CLI
 
 ## Features
-- Turn-based combat
-- Randomized encounters
+- Turn-based combat with accuracy, weapon types, and stats
+- Randomized encounters based on your level
+- XP and leveling with stat increase
 
 ## How to run
 1. Have python installed
