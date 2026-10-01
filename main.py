@@ -51,7 +51,7 @@ def main():
     enemy_weap = Weapon("Scratch", "melee", 6)
 
     while True:
-        encounter = create_encounter(hero.level)
+        encounter = create_encounter(hero)
         print(f"\n{encounter['name']} appears!")
 
         if encounter["type"] == "battle":

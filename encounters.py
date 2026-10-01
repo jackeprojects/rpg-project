@@ -2,12 +2,15 @@ from presets import ENEMY_PRESETS, ENCOUNTER_PRESETS
 from character import Character
 import random
 
-def create_encounter(hero_level: int):
+def create_encounter(hero: Character):
     allowed_encounters = []
 
     for encounter in ENCOUNTER_PRESETS:
-        if hero_level >= encounter["min_level"]:
-            allowed_encounters.append(encounter)
+        if hero.level < encounter["min_level"]:
+            continue
+        if encounter["type"] == "rest" and hero.health == hero.max_health:
+            continue
+        allowed_encounters.append(encounter)
 
     chosen_encounter = random.choice(allowed_encounters)
 
