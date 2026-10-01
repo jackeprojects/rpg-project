@@ -1,8 +1,8 @@
-from presets import HERO_PRESETS, ENEMY_PRESETS, WOODEN_WEAPON_PRESETS
+from presets import HERO_PRESETS, WOODEN_WEAPON_PRESETS
 from character import Character
 from weapon import Weapon
 from battle import Battle
-import random
+from encounters import create_encounter
 
 hero_name = input("Enter a name: ")
 
@@ -31,13 +31,8 @@ hero_weap = Weapon(**WOODEN_WEAPON_PRESETS[weap_key])
 enemy_weap = Weapon("Scratch", "melee", 6)
 
 while True:
-    # Randomize amount of enemies in a battle
-    enemy_count = random.randint(1, 5)
-    enemies = []
-    for _ in range(1, enemy_count + 1):
-        enemy_preset = random.choice(list(ENEMY_PRESETS.keys()))
-        new_enemy = Character(enemy_preset.title(), enemy_preset, **ENEMY_PRESETS[enemy_preset])
-        enemies.append(new_enemy)
+    encounter_name, enemies = create_encounter(hero.level)
+    print(f"\n{encounter_name} appears!")
 
     # Create battle and start it
     battle = Battle(hero, hero_weap, enemies, enemy_weap)
