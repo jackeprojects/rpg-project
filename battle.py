@@ -21,7 +21,7 @@ class Battle:
                 break
 
             print(f"\n========== Round {round_number} ==========")
-            print(f"{self.hero.name} - {self.hero.health}/{self.hero.max_health} HP")
+            print(f"{self.hero.name} - {self.hero.health}/{self.hero.max_health} HP | {self.hero.gold} Gold")
             print("\n-- Choose a target --")
 
             self._hero_turn()

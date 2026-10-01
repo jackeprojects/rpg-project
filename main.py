@@ -36,19 +36,25 @@ def create_hero():
     return hero, hero_weap
 
 
-def award_xp(hero: Character, enemies: list):
-    """Gives the hero the combined xp of the defeated enemies and reports any level up"""
-
-    xp_gained = 0
-    for enemy in enemies:
-        xp_gained += enemy.xp_reward
+def award_rewards(hero: Character, enemies: list):
+    """Gives the hero the xp and gold of the defeated enemies and reports any level up"""
 
     old_level = hero.level
+    xp_gained = 0
+    gold_gained = 0
+
+    for enemy in enemies:
+        xp_gained += enemy.xp_reward
+        gold_gained += enemy.gold_reward
+
     hero.gain_xp(xp_gained)
     print(f"You gained {xp_gained} XP")
 
     if hero.level > old_level:
         print(f"Level up! You are now level {hero.level}.")
+
+    hero.gain_gold(gold_gained)
+    print(f"You found {gold_gained} gold")
 
 
 def main():
@@ -76,7 +82,7 @@ def main():
 
             print("Success! All enemies have been defeated.")
 
-            award_xp(hero, enemies)
+            award_rewards(hero, enemies)
 
         elif encounter["type"] == "rest":
             rest(hero, encounter)
