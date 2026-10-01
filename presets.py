@@ -27,8 +27,14 @@ ENCOUNTER_PRESETS = [
     {"name": "A friendly healer's wagon", "type": "rest", "min_level": 3, "heal_percent": 80},
     {"name": "A moonlit shrine", "type": "rest", "min_level": 4, "heal_percent": 100},
 
-    {"name": "A training ground", "type": "train", "min_level": 1}
+    {"name": "A training ground", "type": "train", "min_level": 1},
+
+    {"name": "A travelling merchant", "type": "shop", "min_level": 1, "stock": ["potion"]}
 ]
+
+SHOP_PRESETS = {
+    "potion": {"price": 30}
+}
 
 WOODEN_WEAPON_PRESETS = {
     "wooden sword": {"name": "Wooden Sword", "archetype": "melee", "base_damage": 20},
