@@ -14,8 +14,9 @@ class Character:
         self.max_health = max_health
         self.xp_reward = xp_reward
         self.level = level
-        
+
         self.health = self.max_health
+        self.xp = 0
 
     def take_damage(self, amount):
         if amount < 0:
@@ -58,3 +59,16 @@ class Character:
             self.health = self.max_health
         else:
             self.health += amount
+
+    def gain_xp(self, amount: int):
+        if amount < 0:
+            raise ValueError("Cannot be negative")
+
+        self.xp += amount
+
+        while self.xp >= self.level * 50:
+            self.xp -= self.level * 50
+            self._level_up()
+
+    def _level_up(self):
+        self.level += 1
