@@ -4,7 +4,7 @@ import random
 class Character:
     """A hero or enemy with stats, health and ability to fight and level"""
 
-    def __init__(self, name: str, role: str, strength: int, dexterity: int, wisdom: int, accuracy: int, max_health=100, xp_reward=0, level=1):
+    def __init__(self, name: str, role: str, strength: int, dexterity: int, wisdom: int, accuracy: int, max_health=100, xp_reward=0, gold_reward=0, level=1):
         self.name = name
         self.role = role
         self.strength = strength
@@ -12,10 +12,12 @@ class Character:
         self.wisdom = wisdom
         self.accuracy = accuracy
         self.max_health = max_health
+        self.gold_reward = gold_reward
         self.xp_reward = xp_reward
         self.level = level
 
         self.health = self.max_health
+        self.gold = 0
         self.xp = 0
 
     def take_damage(self, amount):
@@ -81,6 +83,14 @@ class Character:
         while self.xp >= self.level * 50:
             self.xp -= self.level * 50
             self._level_up()
+
+    def gain_gold(self, amount: int):
+        """Gives gold to player"""
+
+        if amount < 0:
+            raise ValueError("Cannot be negative")
+
+        self.gold += amount
 
     def _level_up(self):
         """Raises the level and stats, max health and fully heals character"""
