@@ -71,7 +71,7 @@ def train(hero: Character):
         print("\nNot a valid choice")
 
 
-def shop(hero, encounter):
+def shop(hero: Character, encounter):
     """Lets the player spend their gold on the items in the shop"""
 
     stock = encounter["stock"]

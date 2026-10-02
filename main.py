@@ -66,6 +66,7 @@ def award_rewards(hero: Character, enemies: list):
 
 def main():
     """Runs encounters one after another until the hero dies or the player quits"""
+
     print()
     print("=" * 30)
     print("RPG PROJECT".center(30))
