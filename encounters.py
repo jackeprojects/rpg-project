@@ -76,7 +76,9 @@ def shop(hero, encounter):
     leave_shop = len(stock) + 1
 
     while True:
-        print(f"\nGold: {hero.gold}")
+        print("\n-- Shop --")
+        print(f"{hero.name} - {hero.health}/{hero.max_health} HP | {hero.gold} Gold | {hero.potions} Potion(s)")
+        print()
 
         for index, item in enumerate(stock, start=1):
             print(f"[{index}] {item.title()} - {SHOP_PRESETS[item]['price']} gold")
