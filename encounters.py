@@ -39,6 +39,8 @@ def rest(hero: Character, encounter):
     if encounter["heal_percent"] <= 0:
         raise ValueError("Must be positive")
 
+    print("\n-- Rest --")
+
     old_health = hero.health
     amount = hero.max_health * encounter["heal_percent"] // 100
     hero.heal(amount)
@@ -50,7 +52,7 @@ def train(hero: Character):
 
     stats = ["strength", "dexterity", "wisdom"]
     while True:
-        print()
+        print("\n-- Training --")
 
         for index, stat in enumerate(stats, start=1):
             print(f"[{index}] {stat.title()} ({getattr(hero, stat)})")
@@ -66,7 +68,7 @@ def train(hero: Character):
                 print(f"Your {stat.title()} is now {getattr(hero, stat)}")
                 return
 
-        print("Not a valid choice")
+        print("\nNot a valid choice")
 
 
 def shop(hero, encounter):
@@ -106,4 +108,4 @@ def shop(hero, encounter):
                 print(f"You've bought a {item.title()} for {price} gold.")
                 continue
 
-        print("Not a valid option")
+        print("\nNot a valid choice")

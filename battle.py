@@ -90,10 +90,10 @@ class Battle:
                     return target
 
                 else:
-                    print("Not a valid choice")
+                    print("\nNot a valid choice")
 
             else:
-                print("Not a valid choice")
+                print("\nNot a valid choice")
 
     def _hero_turn(self):
         """Asks the player whether to attack or use a potion"""
@@ -131,7 +131,7 @@ class Battle:
                         print(f"You drink a potion and recover {hp_recovered} HP.")
                     return
 
-            print("Not a valid choice")
+            print("\nNot a valid choice")
 
     def _enemy_turn(self):
         """Has each living enemy attack the hero"""

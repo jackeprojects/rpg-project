@@ -7,11 +7,14 @@ from encounters import create_encounter, build_enemies, rest, train, shop
 def create_hero():
     """Asks for name and class, then returns their new hero and starter weapon"""
 
+    print("\n-- Hero --")
     hero_name = ""
+
     while not hero_name:
         hero_name = input("Enter a name: ").strip()
 
     while True:
+        print()
         for n, key in enumerate(HERO_PRESETS, start=1):
             print(f"[{n}] {key.title()}")
 
@@ -28,7 +31,7 @@ def create_hero():
                 weap_key = list(WOODEN_WEAPON_PRESETS)[role_index]
                 break
 
-        print("Must choose a valid role.\n")
+        print("\nNot a valid choice")
 
     # Create hero and their weapon
     hero = Character(hero_name, role_key.title(), **HERO_PRESETS[role_key])
@@ -63,6 +66,11 @@ def award_rewards(hero: Character, enemies: list):
 
 def main():
     """Runs encounters one after another until the hero dies or the player quits"""
+    print()
+    print("=" * 30)
+    print("RPG PROJECT".center(30))
+    print("A turn-based adventure".center(30))
+    print("=" * 30)
 
     hero, hero_weap = create_hero()
 
