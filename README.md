@@ -7,6 +7,9 @@ Simple turn-based rpg game that is played through the CLI
 - Randomized encounters based on your level
 - Rest encounters to heal
 - Training encounters to raise stats
+- Potions to heal during combat
+- Shops that sell potions
+- Gold from battles
 
 ## How to run
 1. Have python installed
@@ -16,5 +19,5 @@ Simple turn-based rpg game that is played through the CLI
 ## How to play
 - Name your character
 - Choose your class between Swordsman, Archer or Mage
-- When in combat - choose enemy to attack
+- When in combat - choose to attack an enemy or use a potion
 - Option to continue or quit after each encounter
