@@ -85,15 +85,10 @@ class Battle:
             if choice.isdigit():
                 choice = int(choice)
 
-                if choice in range(1, len(alive) + 1):
-                    target = alive[choice - 1]
-                    return target
+                if 1 <= choice <= len(alive):
+                    return alive[choice - 1]
 
-                else:
-                    print("\nNot a valid choice")
-
-            else:
-                print("\nNot a valid choice")
+            print("\nNot a valid choice")
 
     def _hero_turn(self):
         """Asks the player whether to attack or use a potion"""
