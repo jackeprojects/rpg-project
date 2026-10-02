@@ -1,4 +1,4 @@
-from presets import ENEMY_PRESETS, ENCOUNTER_PRESETS
+from presets import ENEMY_PRESETS, ENCOUNTER_PRESETS, SHOP_PRESETS
 from character import Character
 import random
 
@@ -67,3 +67,41 @@ def train(hero: Character):
                 return
 
         print("Not a valid choice")
+
+
+def shop(hero, encounter):
+    """Lets the player spend their gold on the items in the shop"""
+
+    stock = encounter["stock"]
+    leave_shop = len(stock) + 1
+
+    while True:
+        print(f"\nGold: {hero.gold}")
+
+        for index, item in enumerate(stock, start=1):
+            print(f"[{index}] {item.title()} - {SHOP_PRESETS[item]['price']} gold")
+        print(f"[{leave_shop}] Leave")
+
+        choice = input("Choose option: ")
+
+        if choice.isdigit():
+            choice = int(choice)
+
+            if choice == leave_shop:
+                return
+
+            if 1 <= choice <= len(stock):
+                item = stock[choice - 1]
+                price = SHOP_PRESETS[item]["price"]
+
+                if hero.gold < price:
+                    print("Not enough gold.")
+                    continue
+
+                attribute = SHOP_PRESETS[item]["attribute"]
+                hero.gold -= price
+                setattr(hero, attribute, getattr(hero, attribute) + 1)
+                print(f"You've bought a {item.title()} for {price} gold.")
+                continue
+
+        print("Not a valid option")

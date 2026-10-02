@@ -33,7 +33,7 @@ ENCOUNTER_PRESETS = [
 ]
 
 SHOP_PRESETS = {
-    "potion": {"price": 30}
+    "potion": {"price": 30, "attribute": "potions"}
 }
 
 WOODEN_WEAPON_PRESETS = {
